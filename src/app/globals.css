@@ -2,7 +2,15 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f2937;
+  --primary: #2563eb;
+  --secondary: #7c3aed;
+  --accent: #f59e0b;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --input: #f9fafb;
+  --card: #ffffff;
+  --card-foreground: #1f2937;
 }
 
 @theme inline {
@@ -14,13 +22,81 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f1f5f9;
+    --primary: #3b82f6;
+    --secondary: #8b5cf6;
+    --accent: #fbbf24;
+    --muted: #94a3b8;
+    --border: #334155;
+    --input: #1e293b;
+    --card: #1e293b;
+    --card-foreground: #f1f5f9;
   }
 }
 
+/* 접근성을 위한 기본 스타일 */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* 고령자를 위한 접근성 개선 */
+.elderly-friendly {
+  font-size: 18px !important;
+  line-height: 1.7 !important;
+  font-weight: 500 !important;
+}
+
+/* 고대비 모드 */
+@media (prefers-contrast: high) {
+  :root {
+    --foreground: #000000;
+    --background: #ffffff;
+    --primary: #0000ff;
+    --secondary: #800080;
+  }
+}
+
+/* 모션 감소 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 포커스 표시 개선 */
+*:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* 텍스트 선택 개선 */
+::selection {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+/* 버튼 최소 크기 보장 */
+button, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* 링크 스타일 개선 */
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 3px;
 }

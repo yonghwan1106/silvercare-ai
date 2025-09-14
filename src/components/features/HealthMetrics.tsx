@@ -5,7 +5,8 @@ import { Heart, Thermometer, Activity, Moon, Pill, TrendingUp, TrendingDown, Min
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useHealthStore } from '@/stores/healthStore';
-import { formatTime } from '@/lib/utils';
+import { formatTime, cn } from '@/lib/utils';
+import { HealthChart } from './HealthChart';
 
 interface HealthMetricsProps {
   className?: string;
@@ -196,6 +197,9 @@ export function HealthMetrics({ className }: HealthMetricsProps) {
           </CardContent>
         </Card>
       )}
+
+      {/* Health Chart */}
+      <HealthChart className="mb-6" />
 
       {/* Health Tips */}
       <Card>

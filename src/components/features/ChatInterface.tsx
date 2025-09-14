@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Mic, MicOff } from 'lucide-react';
+import { Send, Mic, MicOff, Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,6 +16,8 @@ interface ChatInterfaceProps {
 export function ChatInterface({ userProfile }: ChatInterfaceProps) {
   const [inputValue, setInputValue] = useState('');
   const [isListening, setIsListening] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -91,21 +93,63 @@ export function ChatInterface({ userProfile }: ChatInterfaceProps) {
     recognition.start();
   };
 
+  // 메시지 필터링 함수
+  const filteredMessages = messages.filter(message =>
+    searchTerm === '' ||
+    message.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="flex flex-col h-full max-w-4xl mx-auto">
       {/* Chat Header */}
       <div className="flex-shrink-0 p-4 bg-gradient-to-r from-blue-50 to-purple-50 border-b border-gray-100">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-medium text-sm">AI</span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <span className="text-white font-medium text-sm">AI</span>
+            </div>
+            <div>
+              <h2 className="font-semibold text-lg text-gray-900">실버메이트</h2>
+              <p className="text-sm text-gray-600">
+                {userProfile.name}님의 AI 케어봇
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="font-semibold text-lg text-gray-900">실버메이트</h2>
-            <p className="text-sm text-gray-600">
-              {userProfile.name}님의 AI 케어봇
-            </p>
-          </div>
+
+          {/* Search Toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setShowSearch(!showSearch)}
+            className={showSearch ? 'bg-blue-100' : ''}
+          >
+            <Search className="h-5 w-5" />
+          </Button>
         </div>
+
+        {/* Search Bar */}
+        {showSearch && (
+          <div className="mt-3 flex items-center space-x-2">
+            <div className="flex-1 relative">
+              <Input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="메시지 검색..."
+                className="pr-8"
+              />
+              {searchTerm && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-1 top-1/2 transform -translate-y-1/2 h-6 w-6"
+                  onClick={() => setSearchTerm('')}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Messages Area */}
@@ -124,7 +168,7 @@ export function ChatInterface({ userProfile }: ChatInterfaceProps) {
           </div>
         )}
 
-        {messages.map((message) => (
+        {filteredMessages.map((message) => (
           <div
             key={message.id}
             className={cn(

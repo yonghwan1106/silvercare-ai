@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Heart, Phone, Settings, Menu, Bell } from 'lucide-react';
+import { Heart, Phone, Settings, Menu, Bell, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChatInterface } from '@/components/features/ChatInterface';
@@ -42,7 +42,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 elderly-friendly">
       {/* Header */}
       <header className="bg-white/90 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,7 +63,12 @@ export default function Home() {
                   <Heart className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900">실버케어 AI</h1>
+                  <div className="flex items-center space-x-2">
+                    <h1 className="text-xl font-bold text-gray-900">실버케어 AI</h1>
+                    <span className="px-2 py-1 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs font-medium rounded-full shadow-sm">
+                      AI 라이프 아이디어 챌린지
+                    </span>
+                  </div>
                   <p className="text-sm text-gray-600 hidden sm:block">스마트 돌봄 서비스</p>
                 </div>
               </div>
@@ -103,8 +108,8 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
           {/* Sidebar Navigation */}
           <div className={`lg:col-span-3 ${sidebarOpen ? 'block' : 'hidden lg:block'}`}>
             <Card className="sticky top-24">
@@ -120,7 +125,8 @@ export default function Home() {
                     setSidebarOpen(false);
                   }}
                 >
-                  💬 AI 대화
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  AI 대화
                 </Button>
                 <Button
                   variant={currentView === 'health' ? 'default' : 'ghost'}
@@ -130,7 +136,8 @@ export default function Home() {
                     setSidebarOpen(false);
                   }}
                 >
-                  ❤️ 건강 관리
+                  <Heart className="h-4 w-4 mr-2" />
+                  건강 관리
                 </Button>
                 <Button
                   variant={currentView === 'notifications' ? 'default' : 'ghost'}
@@ -140,7 +147,8 @@ export default function Home() {
                     setSidebarOpen(false);
                   }}
                 >
-                  🔔 알림
+                  <Bell className="h-4 w-4 mr-2" />
+                  알림
                   {unreadCount > 0 && (
                     <span className="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">
                       {unreadCount}
@@ -155,7 +163,8 @@ export default function Home() {
                     setSidebarOpen(false);
                   }}
                 >
-                  ⚙️ 설정
+                  <Settings className="h-4 w-4 mr-2" />
+                  설정
                 </Button>
               </CardContent>
             </Card>
@@ -167,20 +176,20 @@ export default function Home() {
           {/* Main Content */}
           <div className="lg:col-span-9">
             {/* Welcome Message */}
-            <Card className="mb-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white border-none">
-              <CardContent className="p-6">
+            <Card className="mb-4 sm:mb-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white border-none">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <h2 className="text-2xl font-bold mb-2">
+                  <div className="flex-1">
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">
                       {greetingMessage}
                     </h2>
-                    <p className="text-blue-100">
+                    <p className="text-blue-100 text-sm sm:text-base">
                       오늘은 {formatDate(new Date())}입니다.
                     </p>
                   </div>
-                  <div className="hidden sm:block">
-                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                      <Heart className="h-8 w-8 text-white" />
+                  <div className="hidden sm:block ml-4">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center">
+                      <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                     </div>
                   </div>
                 </div>
@@ -189,7 +198,7 @@ export default function Home() {
 
             {/* Content Based on Current View */}
             {currentView === 'chat' && (
-              <Card className="h-[600px]">
+              <Card className="h-[70vh] min-h-[500px] max-h-[800px]">
                 <ChatInterface userProfile={DEMO_USER_PROFILE} />
               </Card>
             )}

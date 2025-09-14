@@ -138,7 +138,9 @@ export function QuickActions({ className }: QuickActionsProps) {
     <Card className={className}>
       <CardHeader>
         <CardTitle className="text-lg flex items-center space-x-2">
-          <span>⚡</span>
+          <div className="w-6 h-6 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full flex items-center justify-center">
+            <span className="text-white text-xs">⚡</span>
+          </div>
           <span>빠른 실행</span>
         </CardTitle>
       </CardHeader>
