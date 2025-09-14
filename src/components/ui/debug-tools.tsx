@@ -84,7 +84,7 @@ export function DebugTools() {
         </div>
 
         <div className="text-xs text-gray-500 mt-2">
-          💡 Date 에러가 발생하면 "모든 데이터 초기화"를 눌러보세요.
+          💡 Date 에러가 발생하면 &quot;모든 데이터 초기화&quot;를 눌러보세요.
         </div>
       </CardContent>
     </Card>

@@ -5,8 +5,7 @@ import { Heart, Thermometer, Activity, Moon, Pill, TrendingUp, TrendingDown, Min
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useHealthStore } from '@/stores/healthStore';
-import { HealthMetrics as HealthMetricsType } from '@/types';
-import { cn, getHealthStatusColor, formatTime } from '@/lib/utils';
+import { formatTime } from '@/lib/utils';
 
 interface HealthMetricsProps {
   className?: string;

@@ -108,7 +108,7 @@ export const createNotification = {
     actionRequired,
   }),
 
-  emergency: (title: string, message: string, metadata?: any) => ({
+  emergency: (title: string, message: string, metadata?: Record<string, unknown>) => ({
     type: 'emergency' as const,
     title,
     message,

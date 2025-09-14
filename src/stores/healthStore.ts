@@ -44,8 +44,8 @@ export const useHealthStore = create<HealthStore>()(
           window.addEventListener('beforeunload', cleanup);
 
           // Store interval ID for cleanup
-          (window as any).__healthSimulationInterval = interval;
-          (window as any).__healthSimulationCleanup = cleanup;
+          (window as typeof window & { __healthSimulationInterval?: NodeJS.Timeout; __healthSimulationCleanup?: () => void }).__healthSimulationInterval = interval;
+          (window as typeof window & { __healthSimulationInterval?: NodeJS.Timeout; __healthSimulationCleanup?: () => void }).__healthSimulationCleanup = cleanup;
         }
       },
 
@@ -53,8 +53,8 @@ export const useHealthStore = create<HealthStore>()(
         set({ isSimulating: false });
 
         if (typeof window !== 'undefined') {
-          const interval = (window as any).__healthSimulationInterval;
-          const cleanup = (window as any).__healthSimulationCleanup;
+          const interval = (window as typeof window & { __healthSimulationInterval?: NodeJS.Timeout; __healthSimulationCleanup?: () => void }).__healthSimulationInterval;
+          const cleanup = (window as typeof window & { __healthSimulationInterval?: NodeJS.Timeout; __healthSimulationCleanup?: () => void }).__healthSimulationCleanup;
 
           if (interval) {
             clearInterval(interval);

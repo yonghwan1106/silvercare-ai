@@ -245,7 +245,7 @@ export function ChatInterface({ userProfile }: ChatInterfaceProps) {
 // Add speech recognition types to window
 declare global {
   interface Window {
-    SpeechRecognition: any;
-    webkitSpeechRecognition: any;
+    SpeechRecognition: typeof SpeechRecognition;
+    webkitSpeechRecognition: typeof SpeechRecognition;
   }
 }
