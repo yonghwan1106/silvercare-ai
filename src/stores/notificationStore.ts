@@ -99,6 +99,7 @@ export const createNotification = {
     title,
     message,
     actionRequired: false,
+    read: false,
   }),
 
   warning: (title: string, message: string, actionRequired = false) => ({
@@ -106,6 +107,7 @@ export const createNotification = {
     title,
     message,
     actionRequired,
+    read: false,
   }),
 
   emergency: (title: string, message: string, metadata?: Record<string, unknown>) => ({
@@ -114,6 +116,7 @@ export const createNotification = {
     message,
     actionRequired: true,
     metadata,
+    read: false,
   }),
 
   reminder: (title: string, message: string) => ({
@@ -121,5 +124,6 @@ export const createNotification = {
     title,
     message,
     actionRequired: false,
+    read: false,
   }),
 };
